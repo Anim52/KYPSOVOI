@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
-namespace WpfApp1.Services
+namespace WpfApp1.Service
 {
     public enum Status 
     {
@@ -39,6 +41,8 @@ namespace WpfApp1.Services
         public enum StatusReservations;
         public int NumberOfPersons { get; set; }
         public Status Status { get; set; }
+        [NotMapped]
+
         public string StatusRegister
         {
             get

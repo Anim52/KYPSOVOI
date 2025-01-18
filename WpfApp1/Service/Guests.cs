@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WpfApp1.Services
+namespace WpfApp1.Service
 {
     public class Guests
     {

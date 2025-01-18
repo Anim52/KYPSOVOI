@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
-namespace WpfApp1.Services
+namespace WpfApp1.Service
 {
     public class Services
     {
@@ -19,7 +21,7 @@ namespace WpfApp1.Services
         }
         public Services()
         {
-            
+
         }
         public Guid Id { get; set; }
         public  Employees Employees { get; set; }
@@ -28,6 +30,7 @@ namespace WpfApp1.Services
         public string TypeServices { get; set; }
         public string NameServices { get; set; }
 
+            
         public override string ToString()
         {
             return $"{Employees},{Description},{Cost},{TypeServices},{NameServices}";
