@@ -10,6 +10,16 @@
         Icon="{StaticResource Ico}"
         >
     <Grid>
-       
+        <TabControl Margin="20">
+            <TabItem Header="Главная страница" Background="Transparent">
+                
+            </TabItem>
+            <TabItem Header="Персонал">
+                <Grid Grid.Row="1">
+                    
+                </Grid>
+            </TabItem>
+            
+        </TabControl>
     </Grid>
 </Window>
