@@ -1,0 +1,44 @@
+﻿<Window x:Class="WpfApp1.Views.AutorizationView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1.Views"
+        mc:Ignorable="d"
+        Title="Авторизация" Height="400" Width="240"
+        WindowStartupLocation="CenterScreen"
+        Background="Transparent"
+        >
+    <Border CornerRadius="20" Background="White">
+        <Grid>
+            <TabControl HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="0">
+                <TabItem Header="Login in">
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Width="auto">
+                        <Label Content="Login" Margin="0,0,0,10"></Label>
+                        <TextBox></TextBox>
+                        <Label Content="Password" Margin="0,0,0,10"></Label>
+                        <TextBox></TextBox>
+                        <Button Content="Login" Margin="0,10,0,10" ></Button>
+                        <Button Content="Close" Margin="0,10,0,10" ></Button>
+                    </StackPanel>
+                </TabItem>
+                <TabItem Header="Registration">
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Width="auto">
+                        <Label Content="LastName"></Label>
+                        <TextBox Text=""></TextBox>
+                        <Label Content="FirstName"></Label>
+                        <TextBox></TextBox>
+                        <Label Content="MiddleName"></Label>
+                        <TextBox></TextBox>
+                        <Label Content="Login"></Label>
+                        <TextBox></TextBox>
+                        <Label Content="Password"></Label>
+                        <TextBox></TextBox>
+                        <Button Content="Register" Margin="0,10,0,10" ></Button>
+                        <Button Content="Close" Margin="0,10,0,10" ></Button>
+                    </StackPanel>
+                </TabItem>
+            </TabControl>
+        </Grid>
+    </Border>
+</Window>

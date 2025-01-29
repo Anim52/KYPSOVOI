@@ -16,7 +16,7 @@ namespace WpfApp1.Context
         public DbSet<Nomer> Nomers { get; set; }
         public DbSet<Reservations> Reservations { get; set; }
         public DbSet<Services> Services { get; set; }
-
+        public DbSet<User> User { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

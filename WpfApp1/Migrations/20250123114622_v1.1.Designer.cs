@@ -12,8 +12,8 @@ using WpfApp1.Context;
 namespace WpfApp1.Migrations
 {
     [DbContext(typeof(SqlServerContext))]
-    [Migration("20250118164035_v1.0")]
-    partial class v10
+    [Migration("20250123114622_v1.1")]
+    partial class v11
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -191,6 +191,37 @@ namespace WpfApp1.Migrations
                     b.HasIndex("EmployeesId");
 
                     b.ToTable("Services");
+                });
+
+            modelBuilder.Entity("WpfApp1.Service.User", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Firstname")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Lastname")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Login")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Middlename")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("User");
                 });
 
             modelBuilder.Entity("WpfApp1.Service.Reservations", b =>
