@@ -33,16 +33,24 @@
         </Style>
 
     <Style TargetType="TextBox" x:Key="TextBoxStyle">
-        <Setter Property="Height" Value="150"/>
+        <Setter Property="Height" Value="50"/>
         <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="Padding" Value="10"/>
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="Background" Value="#ebe9de"/>
+        <Setter Property="BorderBrush" Value="Gray"/>
+        <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate>
-                    <Border  CornerRadius="10" Background="#ebe9de" />
+                <ControlTemplate TargetType="TextBox">
+                    <Border CornerRadius="10" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                        <ScrollViewer Margin="5" x:Name="PART_ContentHost"/>
+                    </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
- 
+
+
 
 </ResourceDictionary>

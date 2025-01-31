@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using WpfApp1.Command;
 using WpfApp1.Handlers;
 using WpfApp1.Service;
+using WpfApp1.Logger;
+using Microsoft.Extensions.Logging;
 
 namespace WpfApp1.ViewModel
 {
@@ -18,7 +20,11 @@ namespace WpfApp1.ViewModel
                 var user = User.Create(lastname, firstname, middlename, login, password);
                 if(InputValidator.IsValid(user))
                 {
-
+                    Logger.Logger.Info("Учетная запись добавлена");
+                }
+                else
+                {
+                    Logger.Logger.Info("Учетная не добавлена");
                 }
             });
             CloseCommand = new RelayCommand(o =>
@@ -41,6 +47,7 @@ namespace WpfApp1.ViewModel
         public RelayCommand LoginCommand { get; }
         public RelayCommand RegisterCommand { get; }
         public RelayCommand CloseCommand { get; }
+     
 
     }
 }

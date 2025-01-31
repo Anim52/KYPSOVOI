@@ -31,7 +31,7 @@
                 <TextBox Text="{Binding Login}"  Height="50" Style="{StaticResource TextBoxStyle}" Foreground="Black" Margin="0,0,10,20"></TextBox>
                 <Label  Content="Password" FontSize="24"></Label>
                 <TextBox Text="{Binding Password}" HorizontalContentAlignment="Center" Height="50" Style="{StaticResource TextBoxStyle}" Margin="0,0,0,20"></TextBox>
-                <Button Content="Registration " HorizontalAlignment="Left" Width="130" Height="55" Style="{StaticResource RoundedButton}"></Button>
+                <Button Command="{Binding RegisterCommand}" Content="Registration " HorizontalAlignment="Left" Width="130" Height="55" Style="{StaticResource RoundedButton}"></Button>
             </StackPanel>
             <Grid Grid.Column="1" VerticalAlignment="Stretch">
 
