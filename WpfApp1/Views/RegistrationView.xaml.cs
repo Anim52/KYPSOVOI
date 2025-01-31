@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,19 +15,20 @@ using System.Windows.Shapes;
 namespace WpfApp1.Views
 {
     /// <summary>
-    /// Логика взаимодействия для AutorizationView.xaml
+    /// Логика взаимодействия для RegistrationView.xaml
     /// </summary>
-    public partial class AutorizationView : Window
+    public partial class RegistrationView : Window
     {
-        public AutorizationView()
+        public RegistrationView()
         {
             InitializeComponent();
+            AutorizationView autorizationView = new AutorizationView();
         }
 
-        private void Registration_Btn(object sender, RoutedEventArgs e)
+        private void Login_Btn(object sender, RoutedEventArgs e)
         {
-            RegistrationView registrationView = new RegistrationView();
-            registrationView.Show();
+            AutorizationView autorizationView = new AutorizationView();
+            autorizationView.Show();
             this.Close();
         }
     }

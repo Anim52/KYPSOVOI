@@ -20,7 +20,7 @@
             </Grid.ColumnDefinitions>
             <StackPanel Margin="20,40,0,20" VerticalAlignment="Center">
                 <Label Content="Login" FontSize="24" Margin="0" ></Label>
-                <TextBox Margin="0,0,10,20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="50" Style="{StaticResource TextBoxStyle}" Foreground="Black"></TextBox>
+                <TextBox Margin="0,0,10,20"  Height="50" Style="{StaticResource TextBoxStyle}" Foreground="Black"></TextBox>
                 <Label  Content="Password" FontSize="24"></Label>
                 <TextBox Margin="0,0,10,20" HorizontalContentAlignment="Center" Height="50" Style="{StaticResource TextBoxStyle}"></TextBox>
                 <Button Content="Login in" HorizontalAlignment="Left" Width="130" Height="55" Style="{StaticResource RoundedButton}"></Button>
@@ -36,7 +36,7 @@
                 <StackPanel Background="#80000000" >
                     <TextBlock Text="Впервые выбираете наш отель?" Foreground="White" FontSize="17" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,60,10,0" TextWrapping="Wrap"></TextBlock>
                     <TextBlock Text="Впервые выбираете наш отель? Регистрация займет всего несколько минут, и вы сможете наслаждаться комфортом и отличным обслуживанием, которое мы подготовили специально для вас!" Margin="10,60,10,0"  Foreground="White" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                    <Button Content="Registration >>" HorizontalAlignment="Center" Width="130" Height="55" Margin="10,77,10,0" Foreground="White" Background="#403D39" Style="{StaticResource RoundedButton}"/>
+                    <Button Content="Registration >>" HorizontalAlignment="Center" Width="130" Height="55" Margin="10,77,10,0" Foreground="White" Background="#403D39" Style="{StaticResource RoundedButton}" Click="Registration_Btn"/>
                 </StackPanel>
             </Grid>
         </Grid>
