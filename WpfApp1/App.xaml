@@ -7,6 +7,8 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Assets/Element/Logo.xaml"/>
+                <ResourceDictionary Source="/Assets/Element/Fonts.xaml"/>
+                <ResourceDictionary Source="/Assets/Element/Elements.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

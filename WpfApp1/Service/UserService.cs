@@ -10,9 +10,9 @@ namespace WpfApp1.Service
 {
     public static class UserService
     {
-        public static ICollection<User> GetUsers()
-        {
-            return DbContext
-        }
+        //public static ICollection<User> GetUsers()
+        //{
+        //    return DbContext
+        //}
     }
 }

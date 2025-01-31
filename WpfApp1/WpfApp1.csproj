@@ -9,8 +9,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Assets\Recources\Ico.ico" />
-    <None Remove="Assets\Recources\Logo.jpg" />
+    <None Remove="Assets\Resources\Ico.ico" />
+    <None Remove="Assets\Resources\Login.jpg" />
+    <None Remove="Assets\Resources\Logo.jpg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,8 +25,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Assets\Recources\Ico.ico" />
-    <Resource Include="Assets\Recources\Logo.jpg" />
+    <Resource Include="Assets\Resources\Ico.ico" />
+    <Resource Include="Assets\Resources\Login.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Resources\Logo.jpg" />
   </ItemGroup>
 
 </Project>

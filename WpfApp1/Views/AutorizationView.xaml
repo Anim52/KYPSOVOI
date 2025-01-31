@@ -5,40 +5,40 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1.Views"
         mc:Ignorable="d"
-        Title="Авторизация" Height="400" Width="240"
+        Title="Авторизация" Height="450" Width="800"
+        WindowStyle="None"
+        AllowsTransparency="True"
         WindowStartupLocation="CenterScreen"
         Background="Transparent"
+        FontFamily="{StaticResource Montserrat}"
         >
-    <Border CornerRadius="20" Background="White">
+    <Border CornerRadius="20" Background="#F7F3E3" BorderThickness="2" BorderBrush="Black">
         <Grid>
-            <TabControl HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="0">
-                <TabItem Header="Login in">
-                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Width="auto">
-                        <Label Content="Login" Margin="0,0,0,10"></Label>
-                        <TextBox></TextBox>
-                        <Label Content="Password" Margin="0,0,0,10"></Label>
-                        <TextBox></TextBox>
-                        <Button Content="Login" Margin="0,10,0,10" ></Button>
-                        <Button Content="Close" Margin="0,10,0,10" ></Button>
-                    </StackPanel>
-                </TabItem>
-                <TabItem Header="Registration">
-                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Width="auto">
-                        <Label Content="LastName"></Label>
-                        <TextBox Text=""></TextBox>
-                        <Label Content="FirstName"></Label>
-                        <TextBox></TextBox>
-                        <Label Content="MiddleName"></Label>
-                        <TextBox></TextBox>
-                        <Label Content="Login"></Label>
-                        <TextBox></TextBox>
-                        <Label Content="Password"></Label>
-                        <TextBox></TextBox>
-                        <Button Content="Register" Margin="0,10,0,10" ></Button>
-                        <Button Content="Close" Margin="0,10,0,10" ></Button>
-                    </StackPanel>
-                </TabItem>
-            </TabControl>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition x:Name="col1" Width="2*"/>
+                <ColumnDefinition x:Name="col2" Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Margin="20,40,0,20" VerticalAlignment="Center">
+                <Label Content="Login" FontSize="24" Margin="0" ></Label>
+                <TextBox Margin="0,0,10,20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="50" Style="{StaticResource TextBoxStyle}" Foreground="Black"></TextBox>
+                <Label  Content="Password" FontSize="24"></Label>
+                <TextBox Margin="0,0,10,20" HorizontalContentAlignment="Center" Height="50" Style="{StaticResource TextBoxStyle}"></TextBox>
+                <Button Content="Login in" HorizontalAlignment="Left" Width="130" Height="55" Style="{StaticResource RoundedButton}"></Button>
+            </StackPanel>
+            <Grid Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                <StackPanel>
+                    <Border Height="446" CornerRadius="0,20,20,0">
+                        <Border.Background >
+                            <ImageBrush ImageSource="/Assets/Resources/Login.jpg" Stretch="UniformToFill"/>
+                        </Border.Background>
+                    </Border>
+                </StackPanel>
+                <StackPanel Background="#80000000" >
+                    <TextBlock Text="Впервые выбираете наш отель?" Foreground="White" FontSize="17" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,60,10,0" TextWrapping="Wrap"></TextBlock>
+                    <TextBlock Text="Впервые выбираете наш отель? Регистрация займет всего несколько минут, и вы сможете наслаждаться комфортом и отличным обслуживанием, которое мы подготовили специально для вас!" Margin="10,60,10,0"  Foreground="White" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <Button Content="Registration >>" HorizontalAlignment="Center" Width="130" Height="55" Margin="10,77,10,0" Foreground="White" Background="#403D39" Style="{StaticResource RoundedButton}"/>
+                </StackPanel>
+            </Grid>
         </Grid>
     </Border>
 </Window>
