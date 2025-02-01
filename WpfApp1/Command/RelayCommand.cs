@@ -7,27 +7,25 @@ using System.Windows.Input;
 
 namespace WpfApp1.Command
 {
-    public class RelayCommand 
+    public class RelayCommand : ICommand
     {
-        private Action<object> execute;
-        private Func<object, bool> canExecute;
+        private readonly Action<object> _execute;
+        private readonly Predicate<object> _canExecute;
 
-        public event EventHandler? CanExecuteChanged;
-
-        public RelayCommand(Action<object> execute, Func<object, bool> canExecute = null!)
+        public RelayCommand(Action<object> execute, Predicate<object> canExecute = null)
         {
-            this.execute = execute;
-            this.canExecute = canExecute;
+            _execute = execute ?? throw new ArgumentNullException(nameof(execute));
+            _canExecute = canExecute;
         }
 
-        public bool CanExecute(object? parameter)
-        {
-            return this.canExecute == null || this.canExecute(parameter);
-        }
+        public bool CanExecute(object parameter) => _canExecute == null || _canExecute(parameter);
 
-        public void Execute(object? parameter)
+        public void Execute(object parameter) => _execute(parameter);
+
+        public event EventHandler CanExecuteChanged
         {
-            this.execute(parameter);
+            add => CommandManager.RequerySuggested += value;
+            remove => CommandManager.RequerySuggested -= value;
         }
     }
 }

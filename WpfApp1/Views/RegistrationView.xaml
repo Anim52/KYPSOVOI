@@ -21,16 +21,22 @@
                 <ColumnDefinition x:Name="col2" Width="1*"/>
             </Grid.ColumnDefinitions>
             <StackPanel  VerticalAlignment="Center" Margin="20,40,0,20">
+                
                 <Label Content="FirsName" FontSize="24"/>
                 <TextBox Text="{Binding Firstname}"  Height="50" Style="{StaticResource TextBoxStyle}" Foreground="Black" Margin="0,0,10,20"></TextBox>
+                
                 <Label Content="MiddleName" FontSize="24"/>
                 <TextBox Text="{Binding Middlename}"  Height="50" Style="{StaticResource TextBoxStyle}" Foreground="Black" Margin="0,0,10,20"></TextBox>
+                
                 <Label Content="LastName" FontSize="24" Margin="0" ></Label>
                 <TextBox Text="{Binding Lastname}"  Height="50" Style="{StaticResource TextBoxStyle}" Foreground="Black" Margin="0,0,10,20"></TextBox>
+                
                 <Label Content="Login" FontSize="24" Margin="0" ></Label>
                 <TextBox Text="{Binding Login}"  Height="50" Style="{StaticResource TextBoxStyle}" Foreground="Black" Margin="0,0,10,20"></TextBox>
+                
                 <Label  Content="Password" FontSize="24"></Label>
-                <TextBox Text="{Binding Password}" HorizontalContentAlignment="Center" Height="50" Style="{StaticResource TextBoxStyle}" Margin="0,0,0,20"></TextBox>
+                <TextBox Text="{Binding Password}"  Height="50" Style="{StaticResource TextBoxStyle}" Margin="0,0,0,20"></TextBox>
+                
                 <Button Command="{Binding RegisterCommand}" Content="Registration " HorizontalAlignment="Left" Width="130" Height="55" Style="{StaticResource RoundedButton}"></Button>
             </StackPanel>
             <Grid Grid.Column="1" VerticalAlignment="Stretch">
@@ -42,6 +48,11 @@
                 </Border>
                
                 <StackPanel Background="#80000000" >
+                    <!--<Button Width="200" Height="200">
+                        <Button.Background>
+                            <ImageBrush ImageSource="/Assets/Resources/Close.png"/>
+                        </Button.Background>
+                    </Button>-->
                     <TextBlock Text="Уже останавливались у нас?" Foreground="White" FontSize="17" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,60,10,0" TextWrapping="Wrap"></TextBlock>
                     <TextBlock Text="Войдите в свой аккаунт, чтобы быстрее оформить бронирование и получить доступ к эксклюзивным предложениям!" FontSize="20" Margin="10,150,10,0"  Foreground="White" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                     <Button Content="Login in >>" HorizontalAlignment="Center" Width="130" Height="55" Margin="10,170,10,0"  Foreground="White" Background="#403D39" Style="{StaticResource RoundedButton}" Click="Login_Btn"/>

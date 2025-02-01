@@ -20,10 +20,10 @@
             </Grid.ColumnDefinitions>
             <StackPanel Margin="20,40,0,20" VerticalAlignment="Center">
                 <Label Content="Login" FontSize="24" Margin="0" ></Label>
-                <TextBox Margin="0,0,10,20"  Height="50" Style="{StaticResource TextBoxStyle}" Foreground="Black"></TextBox>
+                <TextBox Text="{Binding Login}" Margin="0,0,10,20"  Height="50" Style="{StaticResource TextBoxStyle}" Foreground="Black"></TextBox>
                 <Label  Content="Password" FontSize="24"></Label>
-                <TextBox Margin="0,0,10,20" HorizontalContentAlignment="Center" Height="50" Style="{StaticResource TextBoxStyle}"></TextBox>
-                <Button Content="Login in" HorizontalAlignment="Left" Width="130" Height="55" Style="{StaticResource RoundedButton}"></Button>
+                <TextBox Text="{Binding Password}" Margin="0,0,10,20" Height="50" Style="{StaticResource TextBoxStyle}"></TextBox>
+                <Button Command="{Binding LoginCommand}" Content="Login in" HorizontalAlignment="Left" Width="130" Height="55" Style="{StaticResource RoundedButton}"></Button>
             </StackPanel>
             <Grid Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                 <StackPanel>

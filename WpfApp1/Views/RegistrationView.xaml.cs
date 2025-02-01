@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WpfApp1.ViewModel;
 
 namespace WpfApp1.Views
 {
@@ -22,7 +23,9 @@ namespace WpfApp1.Views
         public RegistrationView()
         {
             InitializeComponent();
-            AutorizationView autorizationView = new AutorizationView();
+           
+            RegisterViewModel registerViewModel = new RegisterViewModel();
+            this.DataContext = registerViewModel;
         }
 
         private void Login_Btn(object sender, RoutedEventArgs e)
