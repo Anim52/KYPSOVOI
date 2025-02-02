@@ -84,7 +84,7 @@ namespace WpfApp1.ViewModel
             MessageBox.Show("Регистрация прошла успешно!");
 
             // Закрытие окна регистрации после успешной регистрации
-            CloseRegistrationView();
+            
         }
 
         // Метод для закрытия окна регистрации
