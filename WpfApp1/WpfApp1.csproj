@@ -18,6 +18,7 @@
     <None Remove="Assets\Resources\Numder.png" />
     <None Remove="Assets\Resources\Reservation.png" />
     <None Remove="Assets\Resources\Service.png" />
+    <None Remove="Assets\Resources\User.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -42,6 +43,7 @@
     <Resource Include="Assets\Resources\Numder.png" />
     <Resource Include="Assets\Resources\Reservation.png" />
     <Resource Include="Assets\Resources\Service.png" />
+    <Resource Include="Assets\Resources\User.png" />
   </ItemGroup>
 
 </Project>

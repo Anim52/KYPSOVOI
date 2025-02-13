@@ -5,11 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1.Views"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="1090"
+        Title="MainWindow" Height="650" Width="1100"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         Background="#F7F3E3"
         FontFamily="{StaticResource Montserrat}"
+        ResizeMode="NoResize"
         >
     <Grid>
         <Grid.RowDefinitions>
