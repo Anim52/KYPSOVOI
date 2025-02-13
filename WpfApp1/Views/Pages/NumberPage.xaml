@@ -6,17 +6,20 @@
              xmlns:local="clr-namespace:WpfApp1.Views.Pages"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="White">
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="7*"/>
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="0">
-            <StackPanel>
-                <Label Content="Номера"/>
-                <Button Content="Добавить" />
-                <Button Content="Изменить"/>
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Label Content="Номера" FontSize="26"/>
+                <Button Content="Добавить" Style="{StaticResource LoginButton}" Margin="0,30,0,0" Background="#A98743"/>
+                <Button Content="Изменить" Style="{StaticResource LoginButton}" Margin="0,30,0,0" Background="#A98743"/>
             </StackPanel>
+        </Grid>
+        <Grid Grid.Column="1">
+            <ListBox Background="Transparent"/>
         </Grid>
     </Grid>
 </UserControl>
