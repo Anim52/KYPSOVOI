@@ -9,9 +9,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Assets\Resources\Accaunt.png" />
+    <None Remove="Assets\Resources\Emploee.png" />
+    <None Remove="Assets\Resources\Guest.png" />
     <None Remove="Assets\Resources\Ico.ico" />
     <None Remove="Assets\Resources\Login.jpg" />
     <None Remove="Assets\Resources\Logo.jpg" />
+    <None Remove="Assets\Resources\Numder.png" />
+    <None Remove="Assets\Resources\Reservation.png" />
+    <None Remove="Assets\Resources\Service.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,11 +31,17 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Assets\Resources\Accaunt.png" />
+    <Resource Include="Assets\Resources\Emploee.png" />
+    <Resource Include="Assets\Resources\Guest.png" />
     <Resource Include="Assets\Resources\Ico.ico" />
     <Resource Include="Assets\Resources\Login.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Assets\Resources\Logo.jpg" />
+    <Resource Include="Assets\Resources\Numder.png" />
+    <Resource Include="Assets\Resources\Reservation.png" />
+    <Resource Include="Assets\Resources\Service.png" />
   </ItemGroup>
 
 </Project>
