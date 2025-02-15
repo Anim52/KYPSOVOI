@@ -19,6 +19,7 @@ namespace WpfApp1
                 context.Database.EnsureCreated();
             }
         }
+        public static string CurrentUserLogin { get; set; }
 
     }
 

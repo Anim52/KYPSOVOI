@@ -11,18 +11,19 @@ namespace WpfApp1.Service
     {
         public Guests(Guid id, string lastName, string firstName, string middleName, DateTime dateOfBirth, int passportNumber, string contactDetails, DateTime registrationDate, string preferences)
         {
-            Id = id;
-            LastName = lastName;
+            Id = id; 
             FirstName = firstName;
             MiddleName = middleName;
+            LastName = lastName;
             DateOfBirth = dateOfBirth;
             PassportNumber = passportNumber;
             ContactDetails = contactDetails;
-            RegistrationDate = registrationDate;
+            RegistrationDate = DateTime.Now;
             Preferences = preferences;
         }
         public Guests()
         {
+            RegistrationDate = DateTime.Now;
         }
 
         public Guid Id { get; set; }

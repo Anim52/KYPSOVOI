@@ -10,68 +10,100 @@ using WpfApp1.OtherServices;
 using WpfApp1.Service;
 using WpfApp1.Views;
 using WpfApp1.ViewModel;
+using System.Windows.Input;
 
 namespace WpfApp1.ViewModel
 {
     public class AuthViewModel : BaseViewModel
     {
+        private readonly SqlServerContext _context;
         private readonly AuthService _authService;
-        private string _login;
-        private string _password;
 
-        public string Login
-        {
-            get { return _login; }
-            set
-            {
-                _login = value;
-                OnPropertyChanged(nameof(Login));
-            }
-        }
+        public string Login { get; set; }
+        public string Password { get; set; }
 
-        public string Password
-        {
-            get { return _password; }
-            set
-            {
-                _password = value;
-                OnPropertyChanged(nameof(Password));
-            }
-        }
+        public ICommand LoginCommand { get; }
 
-        // Команды
-        public RelayCommand LoginCommand { get; }
-
-        // Конструктор
         public AuthViewModel()
         {
-            _authService = new AuthService(); // Инициализация сервиса аутентификации
-            LoginCommand = new RelayCommand(LoginExecute, CanLoginExecute); // Создание команды
+            _context = new SqlServerContext();
+            _authService = new AuthService();
+            LoginCommand = new RelayCommand(LoginExecute);
         }
 
-        // Метод, который проверяет возможность входа (например, если поля не пустые)
-        private bool CanLoginExecute(object obj)
-        {
-            return !string.IsNullOrEmpty(Login) && !string.IsNullOrEmpty(Password);
-        }
-
-        // Метод для обработки логики входа
         private void LoginExecute(object obj)
         {
             // Создаем переменную для хранения пользователя
-            User? user = null;
+            User user = null;
 
             // Проверяем, если логин и пароль правильные
             if (_authService.Login(Login, Password, out user))
             {
-                MessageBox.Show("Успешный вход!");
+                // Сохраняем логин текущего пользователя в глобальное статическое свойство
+                App.CurrentUserLogin = user.Login;
 
-                // Создаем и открываем окно MainWindow
-                var mainWindow = new MainWindow();
-                mainWindow.Show();
+                // Получаем текущего пользователя по логину
+                var currentUser = _context.User.FirstOrDefault(u => u.Login == App.CurrentUserLogin);
 
-                // Закрываем окно авторизации
-                Application.Current.Windows[0].Close();
+                if (currentUser != null)
+                {
+                    // Получаем userId из найденного пользователя
+                    Guid userId = currentUser.Id;
+
+                    // Ищем гостя с таким же userId
+                    var guest = _context.Guests.FirstOrDefault(g => g.Id == userId);
+
+                    // Если гостя нет, создаём нового или обновляем существующего
+                    if (guest == null)
+                    {
+                        guest = new Guests
+                        {
+                            Id = userId,
+                            FirstName = currentUser.Firstname,
+                            MiddleName = currentUser.Middlename,
+                            LastName = currentUser.Lastname,
+                            DateOfBirth = DateTime.MinValue, // Поставьте нужные данные по умолчанию
+                            PassportNumber = 0, // Поставьте нужные данные по умолчанию
+                            ContactDetails = string.Empty, // Поставьте нужные данные по умолчанию
+                            RegistrationDate = DateTime.Now, // Устанавливаем текущую дату
+                            Preferences = string.Empty // Поставьте нужные данные по умолчанию
+                        };
+
+                        // Добавляем нового гостя в базу данных
+                        _context.Guests.Add(guest);
+                    }
+                    else
+                    {
+                        // Если гость найден, обновляем его данные
+                        guest.FirstName = currentUser.Firstname;
+                        guest.MiddleName = currentUser.Middlename;
+                        guest.LastName = currentUser.Lastname;
+                        guest.DateOfBirth = DateTime.MinValue; // Пример, если нужно обновить
+                        guest.PassportNumber = 0; // Пример
+                        guest.ContactDetails = string.Empty; // Пример
+                        guest.Preferences = string.Empty; // Пример
+
+                        // Обновляем запись о госте в базе данных
+                        _context.Guests.Update(guest);
+                    }
+
+                    // Сохраняем изменения в базе данных
+                    _context.SaveChanges();
+
+                    // Сообщение об успешном входе
+                    MessageBox.Show("Успешный вход!");
+
+                    // Открываем главное окно
+                    var mainWindow = new MainWindow();
+                    mainWindow.Show();
+
+                    // Закрываем окно авторизации
+                    Application.Current.Windows[0].Close();
+                }
+                else
+                {
+                    MessageBox.Show("Ошибка! Не удалось найти данные пользователя.");
+                }
             }
             else
             {

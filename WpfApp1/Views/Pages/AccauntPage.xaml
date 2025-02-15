@@ -15,15 +15,15 @@
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="0" Margin="10,10,10,0">
             <TextBlock Text="Фио" FontSize="26"/>
-            <TextBox Style="{StaticResource TextBoxStyle}" Width="378" HorizontalAlignment="Left"/>
+            <TextBox Style="{StaticResource TextBoxStyle}" Width="378" HorizontalAlignment="Left" Text="{Binding FullName}"/>
             <TextBlock Text="Дата рождения" FontSize="26" />
-            <TextBox Style="{StaticResource TextBoxStyle}" Width="378"  HorizontalAlignment="Left"/>
+            <TextBox Style="{StaticResource TextBoxStyle}" Width="378"  HorizontalAlignment="Left" Text="{Binding DateOfBirth, StringFormat=d}"/>
             <TextBlock Text="Паспортные данные" FontSize="26"/>
-            <TextBox Style="{StaticResource TextBoxStyle}" Width="378"  HorizontalAlignment="Left"/>
+            <TextBox Style="{StaticResource TextBoxStyle}" Width="378"  HorizontalAlignment="Left" Text="{Binding PassportNumber}"/>
             <TextBlock Text="Контактные данные" FontSize="26"/>
-            <TextBox Style="{StaticResource TextBoxStyle}" Width="378"  HorizontalAlignment="Left"/>
+            <TextBox Style="{StaticResource TextBoxStyle}" Width="378"  HorizontalAlignment="Left" Text="{Binding ContactDetails}"/>
             <TextBlock Text="Предпочтения" FontSize="26"/>
-            <TextBox Style="{StaticResource TextBoxStyle}" Width="378"  HorizontalAlignment="Left"/>
+            <TextBox Style="{StaticResource TextBoxStyle}" Width="378"  HorizontalAlignment="Left" Text="{Binding Preferences}"/>
         </StackPanel>
         <StackPanel Grid.Column="1"  Margin="10,10,10,0">
             <Image Source="/Assets/Resources/User.png" Height="300"/>

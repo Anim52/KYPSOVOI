@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WpfApp1.Context;
+using WpfApp1.Service;
 using WpfApp1.ViewModel;
 using WpfApp1.Views.Pages;
 
@@ -21,16 +23,35 @@ namespace WpfApp1.Views
     /// </summary>
     public partial class MainWindow : Window
     {
+        public readonly SqlServerContext _context;
         public MainWindow()
         {
             InitializeComponent();
             DataContext = new MnViewModel();
-            
+            _context = new SqlServerContext();
+
+
         }
 
         private void btn1_Click(object sender, RoutedEventArgs e)
         {
-            ContentControlFrame.Content = new AccauntPage();
+            string currentUserLogin = App.CurrentUserLogin;
+
+            // Получаем пользователя из базы данных по логину
+            var user = _context.User.FirstOrDefault(u => u.Login == currentUserLogin);
+
+            if (user != null)
+            {
+                // Получаем userId из найденного пользователя
+                Guid userId = user.Id;
+
+                // Передаем userId в конструктор AccauntPage
+                ContentControlFrame.Content = new AccauntPage(userId);  // Вместо this.Content =
+            }
+            else
+            {
+                MessageBox.Show("Пользователь не найден.");
+            }
         }
 
         private void btn2_Click(object sender, RoutedEventArgs e)
