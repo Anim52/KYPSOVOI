@@ -21,15 +21,15 @@
                 <ColumnDefinition x:Name="col2" Width="1*"/>
             </Grid.ColumnDefinitions>
             <StackPanel  VerticalAlignment="Center" Margin="20,40,0,20">
-                
+
+                <Label Content="LastName" FontSize="24"/>
+                <TextBox Text="{Binding Lastname}"  Height="50" Style="{StaticResource TextBoxStyle}" Foreground="Black" Margin="0,0,10,20"></TextBox>
+
                 <Label Content="FirsName" FontSize="24"/>
                 <TextBox Text="{Binding Firstname}"  Height="50" Style="{StaticResource TextBoxStyle}" Foreground="Black" Margin="0,0,10,20"></TextBox>
-                
-                <Label Content="MiddleName" FontSize="24"/>
+
+                <Label Content="MiddleName" FontSize="24" Margin="0" ></Label>
                 <TextBox Text="{Binding Middlename}"  Height="50" Style="{StaticResource TextBoxStyle}" Foreground="Black" Margin="0,0,10,20"></TextBox>
-                
-                <Label Content="LastName" FontSize="24" Margin="0" ></Label>
-                <TextBox Text="{Binding Lastname}"  Height="50" Style="{StaticResource TextBoxStyle}" Foreground="Black" Margin="0,0,10,20"></TextBox>
                 
                 <Label Content="Login" FontSize="24" Margin="0" ></Label>
                 <TextBox Text="{Binding Login}"  Height="50" Style="{StaticResource TextBoxStyle}" Foreground="Black" Margin="0,0,10,20"></TextBox>

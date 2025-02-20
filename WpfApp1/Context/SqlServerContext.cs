@@ -20,7 +20,7 @@ namespace WpfApp1.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server = (localdb)\\MSSQLLocalDB;Database = ToApp");
+            optionsBuilder.UseSqlServer("Server = (localdb)\\MSSQLLocalDB;Database = HotelDb");
         }
     }
 }
