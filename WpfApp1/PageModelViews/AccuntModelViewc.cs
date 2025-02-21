@@ -16,52 +16,156 @@ namespace WpfApp1.PageModelViews
     {
         private readonly SqlServerContext _context;
         private Guests _currentGuest;
-        private bool _isEditing;
+
 
         // Свойства для отображения в профиле
-        public string Firstname { get; set; } = string.Empty;
-        public string Middlename { get; set; } = string.Empty;
-        public string Lastname { get; set; } = string.Empty;
-        public DateTime? DateOfBirth { get; set; } = null; // Nullable тип
-        public int PassportNumber { get; set; } = 0;
-        public string ContactDetails { get; set; } = string.Empty;
-        public DateTime? RegistrationDate { get; set; } = null; // Nullable тип
-        public string Preferences { get; set; } = string.Empty;
-
-        public bool IsEditing
+        private string _lastname;
+        public string Lastname
         {
-            get => _isEditing;
+            get => _lastname;
             set
             {
-                _isEditing = value;
-                OnPropertyChanged(nameof(IsEditing)); // Уведомляем об изменении
+                if (_lastname != value)
+                {
+                    _lastname = value;
+                    OnPropertyChanged(nameof(Lastname));
+                    OnPropertyChanged(nameof(FullName)); // Обновляем FullName
+                }
             }
         }
+
+        private string _firstname;
+        public string Firstname
+        {
+            get => _firstname;
+            set
+            {
+                if (_firstname != value)
+                {
+                    _firstname = value;
+                    OnPropertyChanged(nameof(Firstname));
+                    OnPropertyChanged(nameof(FullName)); // Обновляем FullName
+                }
+            }
+        }
+
+        private string _middlename;
+        public string Middlename
+        {
+            get => _middlename;
+            set
+            {
+                if (_middlename != value)
+                {
+                    _middlename = value;
+                    OnPropertyChanged(nameof(Middlename));
+                    OnPropertyChanged(nameof(FullName)); // Обновляем FullName
+                }
+            }
+        }
+
+        private DateTime? _dateOfBirth;
+        public DateTime? DateOfBirth
+        {
+            get => _dateOfBirth;
+            set
+            {
+                if (_dateOfBirth != value)
+                {
+                    _dateOfBirth = value;
+                    OnPropertyChanged(nameof(DateOfBirth));
+                }
+            }
+        }
+
+        private int _passportNumber;
+        public int PassportNumber
+        {
+            get => _passportNumber;
+            set
+            {
+                if (_passportNumber != value)
+                {
+                    _passportNumber = value;
+                    OnPropertyChanged(nameof(PassportNumber));
+                }
+            }
+        }
+
+        private string _contactDetails;
+        public string ContactDetails
+        {
+            get => _contactDetails;
+            set
+            {
+                if (_contactDetails != value)
+                {
+                    _contactDetails = value;
+                    OnPropertyChanged(nameof(ContactDetails));
+                }
+            }
+        }
+
+        private DateTime? _registrationDate;
+        public DateTime? RegistrationDate
+        {
+            get => _registrationDate;
+            set
+            {
+                if (_registrationDate != value)
+                {
+                    _registrationDate = value;
+                    OnPropertyChanged(nameof(RegistrationDate));
+                }
+            }
+        }
+
+        private string _preferences;
+        public string Preferences
+        {
+            get => _preferences;
+            set
+            {
+                if (_preferences != value)
+                {
+                    _preferences = value;
+                    OnPropertyChanged(nameof(Preferences));
+                }
+            }
+        }
+
+       
 
         // Свойство для полного имени
         public string FullName
         {
             get
             {
-                return _currentGuest != null ? _currentGuest.FullName : string.Empty;
+                // Собираем полное имя из частей
+                return $"{Lastname} {Firstname} {Middlename}".Trim();
             }
             set
             {
-                if (_currentGuest != null)
+                if (!string.IsNullOrWhiteSpace(value))
                 {
+                    // Разбиваем введенное значение на части
                     var nameParts = value.Split(' ');
 
-                    if (nameParts.Length > 0) _currentGuest.LastName = nameParts[0]; // Присваиваем LastName (Фамилия)
-                    if (nameParts.Length > 1) _currentGuest.FirstName = nameParts[1]; // Присваиваем FirstName (Имя)
-                    if (nameParts.Length > 2) _currentGuest.MiddleName = nameParts[2]; // Присваиваем MiddleName (Отчество)
+                    // Присваиваем Lastname, Firstname и Middlename
+                    Lastname = nameParts.Length > 0 ? nameParts[0] : string.Empty;
+                    Firstname = nameParts.Length > 1 ? nameParts[1] : string.Empty;
+                    Middlename = nameParts.Length > 2 ? nameParts[2] : string.Empty;
 
+                    // Уведомляем об изменении свойств
                     OnPropertyChanged(nameof(FullName));
+                    OnPropertyChanged(nameof(Lastname));
+                    OnPropertyChanged(nameof(Firstname));
+                    OnPropertyChanged(nameof(Middlename));
                 }
             }
         }
 
         // Команды
-        public ICommand EditCommand { get; }
         public ICommand SaveCommand { get; }
 
         // Конструктор
@@ -74,13 +178,14 @@ namespace WpfApp1.PageModelViews
 
             if (_currentGuest != null)
             {
+                LoadGuestData();
                 Lastname = _currentGuest.LastName ?? string.Empty;
                 Firstname = _currentGuest.FirstName ?? string.Empty;
                 Middlename = _currentGuest.MiddleName ?? string.Empty;
-                DateOfBirth = _currentGuest.DateOfBirth; // Здесь будет корректно работать
+                DateOfBirth = _currentGuest.DateOfBirth;
                 PassportNumber = _currentGuest.PassportNumber != 0 ? _currentGuest.PassportNumber : 0;
                 ContactDetails = _currentGuest.ContactDetails ?? string.Empty;
-                RegistrationDate = _currentGuest.RegistrationDate; // Используем Nullable тип
+                RegistrationDate = _currentGuest.RegistrationDate;
                 Preferences = _currentGuest.Preferences ?? string.Empty;
             }
             else
@@ -88,18 +193,43 @@ namespace WpfApp1.PageModelViews
                 MessageBox.Show("Ошибка загрузки профиля.");
             }
 
-            IsEditing = false;
-
             // Команды
-            EditCommand = new RelayCommand(EditProfile);
             SaveCommand = new RelayCommand(SaveProfile);
         }
 
-        // Метод для редактирования профиля
-        private void EditProfile(object obj)
+
+        private void LoadGuestData()
         {
-            IsEditing = true;
+            if (_currentGuest == null)
+            {
+                MessageBox.Show("Ошибка: данные пользователя отсутствуют.");
+                return;
+            }
+
+            // Принудительное обновление данных из БД
+            _context.Entry(_currentGuest).Reload();
+
+            // Присваивание значений из обновленного объекта
+            Lastname = _currentGuest.LastName ?? string.Empty;
+            Firstname = _currentGuest.FirstName ?? string.Empty;
+            Middlename = _currentGuest.MiddleName ?? string.Empty;
+            DateOfBirth = _currentGuest.DateOfBirth;
+            PassportNumber = _currentGuest.PassportNumber;
+            ContactDetails = _currentGuest.ContactDetails ?? string.Empty;
+            RegistrationDate = _currentGuest.RegistrationDate;
+            Preferences = _currentGuest.Preferences ?? string.Empty;
+
+            // Обновление привязок
+            OnPropertyChanged(nameof(Lastname));
+            OnPropertyChanged(nameof(Firstname));
+            OnPropertyChanged(nameof(Middlename));
+            OnPropertyChanged(nameof(DateOfBirth));
+            OnPropertyChanged(nameof(PassportNumber));
+            OnPropertyChanged(nameof(ContactDetails));
+            OnPropertyChanged(nameof(RegistrationDate));
+            OnPropertyChanged(nameof(Preferences));
         }
+
 
         // Метод для сохранения профиля
         private void SaveProfile(object obj)
@@ -114,7 +244,7 @@ namespace WpfApp1.PageModelViews
             _currentGuest.FirstName = Firstname;
             _currentGuest.MiddleName = Middlename;
             _currentGuest.LastName = Lastname;
-            _currentGuest.DateOfBirth = DateOfBirth ?? DateTime.MinValue; // Если дата пустая, присваиваем минимальную
+            _currentGuest.DateOfBirth = DateOfBirth ?? DateTime.MinValue;
             _currentGuest.PassportNumber = PassportNumber;
             _currentGuest.ContactDetails = ContactDetails;
             _currentGuest.Preferences = Preferences;
@@ -123,8 +253,9 @@ namespace WpfApp1.PageModelViews
             _context.Guests.Update(_currentGuest);
             _context.SaveChanges();
 
+            LoadGuestData();
+
             MessageBox.Show("Данные сохранены!");
-            IsEditing = false;
         }
     }
 }

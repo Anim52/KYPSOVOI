@@ -67,25 +67,39 @@ namespace WpfApp1.ViewModel
             }
 
             // Проверка на уникальность логина
-            var existingUser = _context.User.FirstOrDefault(u => u.Login == Login); // Используем User
+            var existingUser = _context.User.FirstOrDefault(u => u.Login == Login);
             if (existingUser != null)
             {
                 MessageBox.Show("Пользователь с таким логином уже существует.");
                 return;
             }
 
-            // Создаем нового пользователя
-            var newUser = new User(Guid.NewGuid(), Lastname, Firstname, Middlename, Login, Password);
+            // Создаем нового пользователя с ролью User по умолчанию
+            var newUser = new User
+            {
+                Id = Guid.NewGuid(),
+                Firstname = Firstname,
+                Middlename = Middlename,
+                Lastname = Lastname,
+                Login = Login,
+                Password = Password,
+                Role = "User"  // Роль по умолчанию - User
+            };
 
             // Добавляем нового пользователя в базу данных
-            _context.User.Add(newUser); // Используем User
+            _context.User.Add(newUser);
             _context.SaveChanges();
 
             MessageBox.Show("Регистрация прошла успешно!");
 
-            // Закрытие окна регистрации после успешной регистрации
-            
+            // Очистка полей после успешной регистрации
+            Firstname = string.Empty;
+            Middlename = string.Empty;
+            Lastname = string.Empty;
+            Login = string.Empty;
+            Password = string.Empty;
         }
+
 
         // Метод для закрытия окна регистрации
         private void CloseRegistrationView()

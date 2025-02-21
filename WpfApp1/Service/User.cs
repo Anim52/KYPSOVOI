@@ -27,6 +27,7 @@ namespace WpfApp1.Service
         public string Middlename { get; set; } = null!;
         public string Login { get; set; } = null!;
         public string Password { get; set; } = null!;
+        public string Role { get; set; } = null!;
 
         [NotMapped]
         public string FullName => $"{Lastname},{Firstname},{Middlename}";

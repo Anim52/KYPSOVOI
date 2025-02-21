@@ -7,23 +7,18 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              FontFamily="{StaticResource Montserrat}"
+             
              >
-    <Grid Background="White">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="6*"/>
-        </Grid.ColumnDefinitions>
-        <Grid Grid.Column="0">
-            
-        </Grid>
-        <Grid Grid.Column="1">
+    <Grid>
+        <Grid>
             <StackPanel>
-                <Label Content="Хотите заказать услугу?" FontSize="26" HorizontalAlignment="Center"/>
-                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10">
-                    <TextBlock Text="Название услуги" FontSize="26"/>
+                <Label Content="Хотите заказать услугу?" FontSize="26" HorizontalAlignment="Center" Margin="0,70,0,0"/>
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="40">
+                    <TextBlock Text="Название услуги" FontSize="18" HorizontalAlignment="Center" Margin="10"/>
+                    <TextBox Style="{StaticResource TextBoxStyle}" Width="300"/>
+                    <TextBlock Text="Описание" FontSize="18" HorizontalAlignment="Center" Margin="0,20,0,10"/>
                     <TextBox Style="{StaticResource TextBoxStyle}"/>
-                    <TextBlock Text="Описание" FontSize="26"/>
-                    <TextBox Style="{StaticResource TextBoxStyle}"/>
+                    <Button Style="{StaticResource  LoginButton}" Content="Заказать!" Background="#A98743" Margin="0,30,0,0"/>
                 </StackPanel>
             </StackPanel>
         </Grid>

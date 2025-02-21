@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,24 +13,21 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using WpfApp1.Context;
-using WpfApp1.Service;
-using WpfApp1.ViewModel;
 using WpfApp1.Views.Pages;
 
 namespace WpfApp1.Views
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для UserMainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class UserMainWindow : Window
     {
         public readonly SqlServerContext _context;
-        public MainWindow()
+        public UserMainWindow()
         {
             InitializeComponent();
             _context = new SqlServerContext();
         }
-
         private void btn1_Click(object sender, RoutedEventArgs e)
         {
             string currentUserLogin = App.CurrentUserLogin;
@@ -50,7 +48,6 @@ namespace WpfApp1.Views
                 MessageBox.Show("Пользователь не найден.");
             }
         }
-
         private void btn2_Click(object sender, RoutedEventArgs e)
         {
             ContentControlFrame.Content = new NumberPage();

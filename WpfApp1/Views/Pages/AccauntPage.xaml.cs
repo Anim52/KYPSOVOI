@@ -27,32 +27,9 @@ namespace WpfApp1.Views.Pages
         {
             InitializeComponent();
             AccountViewModel accountViewModel = new AccountViewModel(userId);
-
             this.DataContext = accountViewModel;
         }
-        public class BoolToIsReadOnlyConverter : IValueConverter
-        {
-            public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-            {
-                return (value is bool && (bool)value) ? true : false; // Если IsEditing = true, то делаем элементы доступными
-            }
-
-            public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-            {
-                return value is bool && (bool)value; // Обратный процесс
-            }
-        }
-        public class BoolToIsEnabledConverter : IValueConverter
-        {
-            public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-            {
-                return (value is bool && (bool)value); // Если IsEditing = true, элементы будут активными
-            }
-
-            public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-            {
-                return value is bool && (bool)value;
-            }
-        }
+        
+       
     }
 }

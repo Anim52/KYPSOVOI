@@ -90,12 +90,23 @@ namespace WpfApp1.ViewModel
                     // Сохраняем изменения в базе данных
                     _context.SaveChanges();
 
-                    // Сообщение об успешном входе
-                    MessageBox.Show("Успешный вход!");
-
-                    // Открываем главное окно
-                    var mainWindow = new MainWindow();
-                    mainWindow.Show();
+                    // Проверка роли пользователя
+                    if (currentUser.Role == "Admin")
+                    {
+                        MessageBox.Show("Добро пожаловать, Админ!");
+                        var mainWindow = new MainWindow();
+                        mainWindow.Show();
+                    }
+                    else if (currentUser.Role == "User")
+                    {
+                        MessageBox.Show("Добро пожаловать, Пользователь!");
+                        var userWindow = new UserMainWindow();
+                        userWindow.Show();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ошибка! Неизвестная роль пользователя.");
+                    }
 
                     // Закрываем окно авторизации
                     Application.Current.Windows[0].Close();
