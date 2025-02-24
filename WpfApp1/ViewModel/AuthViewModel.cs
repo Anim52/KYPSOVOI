@@ -74,17 +74,17 @@ namespace WpfApp1.ViewModel
                     }
                     else
                     {
-                        // Если гость найден, обновляем его данные
-                        guest.FirstName = currentUser.Firstname;
-                        guest.MiddleName = currentUser.Middlename;
-                        guest.LastName = currentUser.Lastname;
-                        guest.DateOfBirth = DateTime.MinValue; // Пример, если нужно обновить
-                        guest.PassportNumber = 0; // Пример
-                        guest.ContactDetails = string.Empty; // Пример
-                        guest.Preferences = string.Empty; // Пример
+                        // Если гость найден, обновляем его данные из актуальных данных пользователя
+                        guest.FirstName = guest.FirstName;
+                        guest.MiddleName = guest.MiddleName;
+                        guest.LastName = guest.LastName;
 
-                        // Обновляем запись о госте в базе данных
+                        guest.DateOfBirth = guest.DateOfBirth;
+                        guest.PassportNumber = guest.PassportNumber;
+                        guest.ContactDetails = guest.ContactDetails;
+                        guest.Preferences = guest.Preferences;
                         _context.Guests.Update(guest);
+                        _context.SaveChanges();
                     }
 
                     // Сохраняем изменения в базе данных
