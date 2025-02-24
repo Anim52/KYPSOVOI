@@ -23,10 +23,27 @@ namespace WpfApp1.Views
     public partial class UserMainWindow : Window
     {
         public readonly SqlServerContext _context;
+        private Guid _currentUserId;
         public UserMainWindow()
         {
             InitializeComponent();
             _context = new SqlServerContext();
+        }
+        private void LoadCurrentUserId()
+        {
+            string currentUserLogin = App.CurrentUserLogin;
+
+            // Получаем пользователя из базы данных по логину
+            var user = _context.User.FirstOrDefault(u => u.Login == currentUserLogin);
+
+            if (user != null)
+            {
+                _currentUserId = user.Id;
+            }
+            else
+            {
+                MessageBox.Show("Пользователь не найден.");
+            }
         }
         private void btn1_Click(object sender, RoutedEventArgs e)
         {
@@ -65,7 +82,7 @@ namespace WpfApp1.Views
 
         private void btn5_Click(object sender, RoutedEventArgs e)
         {
-            ContentControlFrame.Content = new ServicePage();
+            ContentControlFrame.Content = new ServicePage(_currentUserId);
         }
 
         private void btn6_Click(object sender, RoutedEventArgs e)

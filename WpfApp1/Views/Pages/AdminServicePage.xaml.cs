@@ -17,14 +17,14 @@ using WpfApp1.PageModelViews;
 namespace WpfApp1.Views.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для ServicePage.xaml
+    /// Логика взаимодействия для AdminServicePage.xaml
     /// </summary>
-    public partial class ServicePage : UserControl
+    public partial class AdminServicePage : UserControl
     {
-        public ServicePage(Guid userId)
+        public AdminServicePage(Guid userId)
         {
             InitializeComponent();
-            ServiceModelPage serviceModelPage = new ServiceModelPage(userId, false);
+            ServiceModelPage serviceModelPage = new ServiceModelPage(userId,true);
             this.DataContext = serviceModelPage;
         }
     }

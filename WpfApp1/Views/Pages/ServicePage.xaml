@@ -14,11 +14,9 @@
             <StackPanel>
                 <Label Content="Хотите заказать услугу?" FontSize="26" HorizontalAlignment="Center" Margin="0,70,0,0"/>
                 <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="40">
-                    <TextBlock Text="Название услуги" FontSize="18" HorizontalAlignment="Center" Margin="10"/>
-                    <TextBox Style="{StaticResource TextBoxStyle}" Width="300"/>
                     <TextBlock Text="Описание" FontSize="18" HorizontalAlignment="Center" Margin="0,20,0,10"/>
-                    <TextBox Style="{StaticResource TextBoxStyle}"/>
-                    <Button Style="{StaticResource  LoginButton}" Content="Заказать!" Background="#A98743" Margin="0,30,0,0"/>
+                    <TextBox Style="{StaticResource TextBoxStyle}" Width="300" Text="{Binding NewRequestDescription, UpdateSourceTrigger=PropertyChanged}"/>
+                    <Button Style="{StaticResource  LoginButton}" Content="Заказать!" Background="#A98743" Margin="0,30,0,0" Command="{Binding CreateRequestCommand}"/>
                 </StackPanel>
             </StackPanel>
         </Grid>

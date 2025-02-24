@@ -10,31 +10,27 @@ namespace WpfApp1.Service
 {
     public class Services
     {
-        public Services(Guid id, Employees employees, string description, decimal cost, string typeServices, string nameServices)
+        public Services(Guid id, Guid userId, string description, DateTime requestDate, string status)
         {
             Id = id;
-            Employees = employees;
+            UserId = userId;
             Description = description;
-            Cost = cost;
-            TypeServices = typeServices;
-            NameServices = nameServices;
+            RequestDate = requestDate;
+            Status = status;
         }
+
         public Services()
         {
 
         }
-        public Guid Id { get; set; }
-        public  Employees Employees { get; set; }
+
+        public Guid Id { get; set; } = Guid.NewGuid();
+        public Guid UserId { get; set; }
         public string Description { get; set; }
-        public decimal Cost { get; set; }
-        public string TypeServices { get; set; }
-        public string NameServices { get; set; }
+        public DateTime RequestDate { get; set; } = DateTime.Now;
+        public string Status { get; set; } = "В обработке";
 
-            
-        public override string ToString()
-        {
-            return $"{Employees},{Description},{Cost},{TypeServices},{NameServices}";
 
-        }
+        
     }
 }
