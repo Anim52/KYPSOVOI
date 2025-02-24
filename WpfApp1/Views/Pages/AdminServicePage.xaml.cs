@@ -27,5 +27,6 @@ namespace WpfApp1.Views.Pages
             ServiceModelPage serviceModelPage = new ServiceModelPage(userId,true);
             this.DataContext = serviceModelPage;
         }
+
     }
 }

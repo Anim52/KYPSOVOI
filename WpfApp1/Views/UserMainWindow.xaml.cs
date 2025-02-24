@@ -28,23 +28,34 @@ namespace WpfApp1.Views
         {
             InitializeComponent();
             _context = new SqlServerContext();
+            LoadCurrentUserId();
         }
         private void LoadCurrentUserId()
         {
             string currentUserLogin = App.CurrentUserLogin;
 
-            // Получаем пользователя из базы данных по логину
+            if (string.IsNullOrWhiteSpace(currentUserLogin))
+            {
+                MessageBox.Show("Ошибка! Логин пользователя пустой.");
+                return;
+            }
+
+            // Выведем логин для проверки
+            MessageBox.Show($"Ищем пользователя с логином: {currentUserLogin}");
+
             var user = _context.User.FirstOrDefault(u => u.Login == currentUserLogin);
 
             if (user != null)
             {
                 _currentUserId = user.Id;
+                MessageBox.Show($"Найден UserId: {_currentUserId}");
             }
             else
             {
-                MessageBox.Show("Пользователь не найден.");
+                MessageBox.Show("Ошибка! Пользователь с таким логином не найден.");
             }
         }
+
         private void btn1_Click(object sender, RoutedEventArgs e)
         {
             string currentUserLogin = App.CurrentUserLogin;
@@ -82,6 +93,12 @@ namespace WpfApp1.Views
 
         private void btn5_Click(object sender, RoutedEventArgs e)
         {
+            if (_currentUserId == Guid.Empty)
+            {
+                MessageBox.Show("Ошибка! UserId пустой.");
+                return;
+            }
+
             ContentControlFrame.Content = new ServicePage(_currentUserId);
         }
 

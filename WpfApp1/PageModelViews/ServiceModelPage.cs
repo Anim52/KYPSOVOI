@@ -10,6 +10,7 @@ using WpfApp1.Command;
 using WpfApp1.Context;
 using WpfApp1.ViewModel;
 using WpfApp1.Service;
+using Microsoft.EntityFrameworkCore;
 
 namespace WpfApp1.PageModelViews
 {
@@ -19,6 +20,10 @@ namespace WpfApp1.PageModelViews
         private Services _selectedService;
         private string _newRequestDescription;
         private bool _isAdmin;
+        private Guid _currentUserId;
+
+        // Добавлено свойство для отображения ФИО
+        private User _currentUser;
 
         // Конструктор
         public ServiceModelPage(Guid userId, bool isAdmin)
@@ -26,9 +31,13 @@ namespace WpfApp1.PageModelViews
             _context = new SqlServerContext();
             ServiceRequests = new ObservableCollection<Services>();
             _isAdmin = isAdmin;
+            _currentUserId = userId;
 
             // Загружаем данные
             LoadServiceRequests();
+
+            // Получаем текущего пользователя для отображения ФИО
+            _currentUser = _context.User.FirstOrDefault(u => u.Id == _currentUserId);
 
             // Команды
             CreateRequestCommand = new RelayCommand(CreateRequest);
@@ -61,20 +70,33 @@ namespace WpfApp1.PageModelViews
         // Коллекция для отображения заявок
         public ObservableCollection<Services> ServiceRequests { get; set; }
 
+        // Новый проперт для отображения ФИО с инициалами
+        public string Fullname => _currentUser != null
+            ? $"{_currentUser.Lastname} {_currentUser.Firstname[0]}. {_currentUser.Middlename[0]}."
+            : string.Empty;
+
         // Команды
         public ICommand CreateRequestCommand { get; }
         public ICommand CompleteRequestCommand { get; }
         public ICommand DeleteRequestCommand { get; }
 
-        // Метод для загрузки заявок из БД
+        // Метод для загрузки заявок из БД с подгрузкой пользователей
         private void LoadServiceRequests()
         {
             ServiceRequests.Clear();
-            var requests = _context.Services.ToList();
+
+            // Загружаем все заявки и связанные с ними пользователи
+            var requests = _context.Services
+                                   .Include(s => s.User) // Подгружаем пользователя вместе с заявкой
+                                   .ToList();
 
             foreach (var request in requests)
             {
-                ServiceRequests.Add(request);
+                // Добавляем заявку только если у нее есть связанный пользователь
+                if (request.User != null)
+                {
+                    ServiceRequests.Add(request);
+                }
             }
         }
 
@@ -89,6 +111,8 @@ namespace WpfApp1.PageModelViews
 
             var newRequest = new Services
             {
+                Id = Guid.NewGuid(),
+                UserId = _currentUserId, // Привязываем заявку к текущему пользователю
                 Description = NewRequestDescription,
                 RequestDate = DateTime.Now,
                 Status = "В обработке"
