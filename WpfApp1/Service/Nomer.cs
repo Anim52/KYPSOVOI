@@ -15,9 +15,16 @@ namespace WpfApp1.Service
         Suite,
         Apartment
     };
+
     public class Nomer
     {
-        public Nomer(Guid id, int number, int floor, bool status, decimal cost, string description)
+        private string _imagePath;
+
+        public string ImagePath
+        {
+            get => _imagePath;
+        }
+        public Nomer(Guid id, int number, int floor, bool status, decimal cost, string description, TypeNumder typeNumder)
         {
             Id = id;
             Number = number;
@@ -25,6 +32,17 @@ namespace WpfApp1.Service
             Status = status;
             Cost = cost;
             Description = description;
+            TypeNumder = typeNumder;
+
+            // Устанавливаем путь к изображению при создании объекта
+            _imagePath = typeNumder switch
+            {
+                TypeNumder.Standart => "/Assets/Resources/standart.jpg",
+                TypeNumder.Studio => "/Assets/Resources/studio.jpg",
+                TypeNumder.Suite => "/Assets/Resources/suite.jpg",
+                TypeNumder.Apartment => "/Assets/Resources/apartment.jpg",
+                _ => "/Assets/Resources/default.jpg"
+            };
         }
         public Nomer()
         {
@@ -60,6 +78,7 @@ namespace WpfApp1.Service
                 }
             }
         }
+       
         public override string ToString()
         {
             

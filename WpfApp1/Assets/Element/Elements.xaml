@@ -93,6 +93,58 @@
         </Setter>
     </Style>
 
+    <Style TargetType="ComboBox" x:Key="ComboBoxStyle">
+        <Setter Property="Height" Value="50"/>
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="Padding" Value="10"/>
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="Background" Value="#ebe9de"/>
+        <Setter Property="BorderBrush" Value="Gray"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ComboBox">
+                    <Grid>
+                        <Border CornerRadius="10" 
+                            Background="{TemplateBinding Background}" 
+                            BorderBrush="{TemplateBinding BorderBrush}" 
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                            <Grid>
+                                <ContentPresenter Margin="5" 
+                                              VerticalAlignment="Center" 
+                                              HorizontalAlignment="Left"/>
+                                <ToggleButton Grid.Column="2" 
+                                          Focusable="False"
+                                          IsChecked="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}"
+                                          Background="Transparent"
+                                          BorderThickness="0"
+                                          HorizontalAlignment="Right"
+                                          VerticalAlignment="Center">
+                                    <Path Fill="Gray" 
+                                      Data="M 0 0 L 8 0 L 4 4 Z" 
+                                      Margin="0,0,10,0"/>
+                                </ToggleButton>
+                            </Grid>
+                        </Border>
+
+                        <!-- Выпадающее меню -->
+                        <Popup Name="PART_Popup"
+                           IsOpen="{TemplateBinding IsDropDownOpen}"
+                           Placement="Bottom"
+                           StaysOpen="False">
+                            <Border Background="White"
+                                BorderBrush="Gray"
+                                BorderThickness="1">
+                                <ScrollViewer MaxHeight="200">
+                                    <ItemsPresenter />
+                                </ScrollViewer>
+                            </Border>
+                        </Popup>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
 
 </ResourceDictionary>

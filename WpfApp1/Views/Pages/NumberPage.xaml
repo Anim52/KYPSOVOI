@@ -7,20 +7,61 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              FontFamily="{StaticResource Montserrat}">
-    <Grid>
+    <Grid x:Name="MainGrid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="7*"/>
         </Grid.ColumnDefinitions>
+
+        <!-- Левая панель с кнопками -->
         <Grid Grid.Column="0">
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                 <Label Content="Номера" FontSize="26"/>
-                <Button Content="Добавить" Style="{StaticResource LoginButton}" Margin="0,30,0,0" Background="#A98743"/>
-                <Button Content="Изменить" Style="{StaticResource LoginButton}" Margin="0,30,0,0" Background="#A98743"/>
+                <Button Content="Добавить" 
+                    Style="{StaticResource LoginButton}" 
+                    Margin="0,30,0,0" 
+                    Background="#A98743" 
+                    x:Name="btn1" 
+                    Click="btn1_Click"/>
+                <Button Content="Изменить" 
+                    Style="{StaticResource LoginButton}" 
+                    Margin="0,30,0,0" 
+                    Background="#A98743"/> 
+                <Button Content="Удалить" 
+                    Style="{StaticResource LoginButton}" 
+                    Command="{Binding DeleteNomerCommand}" 
+                    Margin="0,30,0,0" 
+                    Background="#A98743"/>
             </StackPanel>
         </Grid>
+
+        <!-- Правая панель с ListBox -->
         <Grid Grid.Column="1">
-            <ListBox Background="Transparent"/>
+            <ListBox ItemsSource="{Binding NomerList}" Margin="10,100,10,10">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <TextBox Text="{Binding Number }"/>
+                            <TextBox Text="Номер: {Binding Number}" />
+                            <TextBox Text="Этаж: {Binding Floor}" />
+                            <TextBox Text="Цена: {Binding Cost}" />
+                            <TextBox Text="Описание: {Binding Description}" />
+                            <TextBox Text="Тип: {Binding TypeNumder}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
         </Grid>
+
+        <!-- Оверлей с блюром -->
+        <Border x:Name="Overlay" 
+            Background="#80000000" 
+            Visibility="Collapsed" 
+            Grid.ColumnSpan="2">
+            <Border.Effect>
+                <BlurEffect Radius="10"/>
+            </Border.Effect>
+        </Border>
     </Grid>
+
 </UserControl>

@@ -10,6 +10,8 @@
 
   <ItemGroup>
     <None Remove="Assets\Resources\Accaunt.png" />
+    <None Remove="Assets\Resources\apartment.jpg" />
+    <None Remove="Assets\Resources\default.jpg" />
     <None Remove="Assets\Resources\Emploee.png" />
     <None Remove="Assets\Resources\Guest.png" />
     <None Remove="Assets\Resources\Ico.ico" />
@@ -18,6 +20,9 @@
     <None Remove="Assets\Resources\Numder.png" />
     <None Remove="Assets\Resources\Reservation.png" />
     <None Remove="Assets\Resources\Service.png" />
+    <None Remove="Assets\Resources\standart.jpg" />
+    <None Remove="Assets\Resources\studio.jpg" />
+    <None Remove="Assets\Resources\suite.jpg" />
     <None Remove="Assets\Resources\User.png" />
   </ItemGroup>
 
@@ -33,6 +38,8 @@
 
   <ItemGroup>
     <Resource Include="Assets\Resources\Accaunt.png" />
+    <Resource Include="Assets\Resources\apartment.jpg" />
+    <Resource Include="Assets\Resources\default.jpg" />
     <Resource Include="Assets\Resources\Emploee.png" />
     <Resource Include="Assets\Resources\Guest.png" />
     <Resource Include="Assets\Resources\Ico.ico" />
@@ -43,6 +50,9 @@
     <Resource Include="Assets\Resources\Numder.png" />
     <Resource Include="Assets\Resources\Reservation.png" />
     <Resource Include="Assets\Resources\Service.png" />
+    <Resource Include="Assets\Resources\standart.jpg" />
+    <Resource Include="Assets\Resources\studio.jpg" />
+    <Resource Include="Assets\Resources\suite.jpg" />
     <Resource Include="Assets\Resources\User.png" />
   </ItemGroup>
 

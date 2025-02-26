@@ -1,0 +1,49 @@
+﻿<Window x:Class="WpfApp1.Views.NumberAdd"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1.Views"
+        mc:Ignorable="d"
+        Title="NumberAdd" Height="550" Width="400"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        FontFamily="{StaticResource Montserrat}"
+        >
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="22*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0">
+            <Button Style="{StaticResource LoginButton}" Click="close_Click" Width="75" Height="45" Content="Close" HorizontalAlignment="Right"/>
+        </StackPanel>  
+        <StackPanel Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <TextBlock Text="Номер:" VerticalAlignment="Center" Margin="5"/>
+            <TextBox Grid.Row="0" Text="{Binding Number}" Margin="5" Style="{StaticResource TextBoxStyle}"/>
+
+            <TextBlock Text="Этаж:" VerticalAlignment="Center" Margin="5"/>
+            <TextBox Text="{Binding Floor}" Margin="5" Style="{StaticResource TextBoxStyle}"/>
+
+            <TextBlock Text="Стоимость:" VerticalAlignment="Center" Margin="5"/>
+            <TextBox Text="{Binding Cost}" Margin="5" Style="{StaticResource TextBoxStyle}"/>
+
+
+            <TextBlock Text="Описание:" VerticalAlignment="Center" Margin="5"/>
+            <TextBox  Text="{Binding Description}" Margin="5" Style="{StaticResource TextBoxStyle}"/>
+
+            <TextBlock Text="Тип номера:" VerticalAlignment="Center" Margin="5"/>
+            <ComboBox 
+                
+                  ItemsSource="{Binding TypeNumderList}" 
+                  SelectedItem="{Binding SelectedTypeNumder}" 
+                  Margin="5"/>
+            <!-- Кнопка Добавить -->
+            <Button Content="Добавить" 
+                Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" 
+                Command="{Binding AddNomerCommand}" 
+                Margin="5" Background="#A98743" Style="{StaticResource LoginButton}"/>
+        </StackPanel>
+    </Grid>
+</Window>
