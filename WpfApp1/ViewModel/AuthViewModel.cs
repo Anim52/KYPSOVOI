@@ -50,10 +50,13 @@ namespace WpfApp1.ViewModel
                     // Получаем userId из найденного пользователя
                     Guid userId = currentUser.Id;
 
+                    // ** Добавляем вот эту строку для хранения Id текущего пользователя **
+                    App.CurrentUserId = userId;
+
                     // Ищем гостя с таким же userId
                     var guest = _context.Guests.FirstOrDefault(g => g.Id == userId);
 
-                    // Если гостя нет, создаём нового или обновляем существующего
+                    // Если гостя нет, создаём нового
                     if (guest == null)
                     {
                         guest = new Guests
@@ -62,11 +65,11 @@ namespace WpfApp1.ViewModel
                             FirstName = currentUser.Firstname,
                             MiddleName = currentUser.Middlename,
                             LastName = currentUser.Lastname,
-                            DateOfBirth = DateTime.MinValue, // Поставьте нужные данные по умолчанию
-                            PassportNumber = 0, // Поставьте нужные данные по умолчанию
-                            ContactDetails = string.Empty, // Поставьте нужные данные по умолчанию
-                            RegistrationDate = DateTime.Now, // Устанавливаем текущую дату
-                            Preferences = string.Empty // Поставьте нужные данные по умолчанию
+                            DateOfBirth = DateTime.MinValue, // Задайте нужные значения по умолчанию
+                            PassportNumber = 0, // Задайте нужные значения по умолчанию
+                            ContactDetails = string.Empty, // Задайте нужные значения по умолчанию
+                            RegistrationDate = DateTime.Now, // Текущая дата
+                            Preferences = string.Empty // Задайте нужные значения по умолчанию
                         };
 
                         // Добавляем нового гостя в базу данных
@@ -74,17 +77,11 @@ namespace WpfApp1.ViewModel
                     }
                     else
                     {
-                        // Если гость найден, обновляем его данные из актуальных данных пользователя
-                        guest.FirstName = guest.FirstName;
-                        guest.MiddleName = guest.MiddleName;
-                        guest.LastName = guest.LastName;
-
-                        guest.DateOfBirth = guest.DateOfBirth;
-                        guest.PassportNumber = guest.PassportNumber;
-                        guest.ContactDetails = guest.ContactDetails;
-                        guest.Preferences = guest.Preferences;
+                        // Если гость найден, обновляем его данные
+                        guest.FirstName = currentUser.Firstname;
+                        guest.MiddleName = currentUser.Middlename;
+                        guest.LastName = currentUser.Lastname;
                         _context.Guests.Update(guest);
-                        _context.SaveChanges();
                     }
 
                     // Сохраняем изменения в базе данных

@@ -20,7 +20,7 @@ namespace WpfApp1
             }
 
         }
-
+        public static Guid CurrentUserId { get; set; }
         public static string CurrentUserLogin { get; set; }
         public static string CurrentUserRole { get; set; }
 

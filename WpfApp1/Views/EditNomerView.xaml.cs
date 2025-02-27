@@ -10,23 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using WpfApp1.PageModelViews;
 
-namespace WpfApp1.Views.Pages
+namespace WpfApp1.Views
 {
     /// <summary>
-    /// Логика взаимодействия для GuestPage.xaml
+    /// Логика взаимодействия для EditNomerVieц.xaml
     /// </summary>
-    public partial class GuestPage : UserControl
+    public partial class EditNomerVieц : Window
     {
-        public GuestPage()
+        public EditNomerVieц()
         {
             InitializeComponent();
-
-            UsersViewModel usersViewModel = new UsersViewModel();
-            this.DataContext = usersViewModel;
 
         }
     }

@@ -10,6 +10,7 @@
         WindowStyle="None"
         ResizeMode="NoResize"
         FontFamily="{StaticResource Montserrat}"
+        Background="#F7F3E3"
         >
     <Grid>
         <Grid.RowDefinitions>
@@ -17,7 +18,7 @@
             <RowDefinition Height="22*"/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0">
-            <Button Style="{StaticResource LoginButton}" Click="close_Click" Width="75" Height="45" Content="Close" HorizontalAlignment="Right"/>
+            <Button Background="#A98743" Style="{StaticResource LoginButton}" Click="close_Click" Width="75" Height="45" Content="Close" HorizontalAlignment="Right"/>
         </StackPanel>  
         <StackPanel Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">
             <TextBlock Text="Номер:" VerticalAlignment="Center" Margin="5"/>
@@ -35,7 +36,7 @@
 
             <TextBlock Text="Тип номера:" VerticalAlignment="Center" Margin="5"/>
             <ComboBox 
-                
+                                  
                   ItemsSource="{Binding TypeNumderList}" 
                   SelectedItem="{Binding SelectedTypeNumder}" 
                   Margin="5"/>

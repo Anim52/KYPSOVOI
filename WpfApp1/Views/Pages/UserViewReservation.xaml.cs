@@ -17,17 +17,15 @@ using WpfApp1.PageModelViews;
 namespace WpfApp1.Views.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для GuestPage.xaml
+    /// Логика взаимодействия для UserViewReservation.xaml
     /// </summary>
-    public partial class GuestPage : UserControl
+    public partial class UserViewReservation : UserControl
     {
-        public GuestPage()
+        public UserViewReservation()
         {
             InitializeComponent();
-
-            UsersViewModel usersViewModel = new UsersViewModel();
-            this.DataContext = usersViewModel;
-
+            ReservationsViewModel viewModel = new ReservationsViewModel();
+            this.DataContext = viewModel;
         }
     }
 }

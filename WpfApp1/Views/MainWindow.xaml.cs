@@ -93,5 +93,11 @@ namespace WpfApp1.Views
         {
             ContentControlFrame.Content = new ReservationPage();
         }
+
+        private void Close_btn_Click(object sender, RoutedEventArgs e)
+        {
+            App.Current.Shutdown();
+        }
+       
     }
 }

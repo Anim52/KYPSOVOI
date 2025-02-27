@@ -7,6 +7,8 @@
         mc:Ignorable="d"
         Title="UserMainWindow" Height="650" Width="1100"
         WindowStartupLocation="CenterScreen" WindowStyle="None" ResizeMode="NoResize"
+        Background="#F7F3E3"
+        FontFamily="{StaticResource Montserrat}"
         >
     <Grid>
         <Grid.RowDefinitions>
@@ -26,6 +28,10 @@
                 <Button x:Name="btn6" Width="220" Height="60" Tag="Бронирование" Margin="8" Style="{StaticResource MainButton}" Click="btn6_Click">
                     <Image Source="/Assets/Resources/Reservation.png"/>
                 </Button>
+                <StackPanel Orientation="Horizontal">
+                    <Button x:Name="Close_btn" Content="❌" Style="{StaticResource LoginButton}" Width="50" HorizontalAlignment="Right" Foreground="Black" Margin="460,0,0,0" Click="Close_btn_Click"/>
+                    
+                </StackPanel>
             </StackPanel>
         </Grid>
         <ContentControl x:Name="ContentControlFrame" Grid.Row="1"/>

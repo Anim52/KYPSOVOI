@@ -104,7 +104,13 @@ namespace WpfApp1.Views
 
         private void btn6_Click(object sender, RoutedEventArgs e)
         {
-            ContentControlFrame.Content = new ReservationPage();
+            ContentControlFrame.Content = new UserViewReservation();
         }
+        private void Close_btn_Click(object sender, RoutedEventArgs e)
+        {
+            App.Current.Shutdown();
+        }
+
+       
     }
 }

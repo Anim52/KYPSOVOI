@@ -33,15 +33,16 @@ namespace WpfApp1.ViewModel
             _context = new SqlServerContext();
             AddNomerCommand = new RelayCommand(AddNomer);
             DeleteNomerCommand = new RelayCommand(DeleteNomer, CanDeleteNomer);
+            EditNomerCommand = new RelayCommand(EditNomer, CanEditNomer);
 
             // Заполняем список типов номеров
             TypeNumderList = new ObservableCollection<TypeNumder>
-        {
-            TypeNumder.Standart,
-            TypeNumder.Studio,
-            TypeNumder.Suite,
-            TypeNumder.Apartment
-        };
+            {
+                TypeNumder.Standart,
+                TypeNumder.Studio,
+                TypeNumder.Suite,
+                TypeNumder.Apartment
+            };
 
             // Инициализируем коллекцию номеров
             NomerList = new ObservableCollection<Nomer>(_context.Nomers.ToList());
@@ -128,6 +129,9 @@ namespace WpfApp1.ViewModel
         // Команда для удаления номера
         public ICommand DeleteNomerCommand { get; }
 
+        // Команда для изменения номера
+        public ICommand EditNomerCommand { get; }
+
         // Логика добавления номера
         private void AddNomer(object obj)
         {
@@ -164,6 +168,55 @@ namespace WpfApp1.ViewModel
             SelectedTypeNumder = TypeNumder.Standart;
         }
 
+        // Логика изменения номера
+        private void EditNomer(object obj)
+        {
+            if (SelectedNomer == null)
+            {
+                MessageBox.Show("Пожалуйста, выберите номер для изменения.");
+                return;
+            }
+
+            // Открываем окно редактирования с заполненными полями
+            Number = SelectedNomer.Number;
+            Floor = SelectedNomer.Floor;
+            Cost = SelectedNomer.Cost;
+            Description = SelectedNomer.Description;
+            SelectedTypeNumder = SelectedNomer.TypeNumder;
+
+            var result = MessageBox.Show("Вы уверены, что хотите сохранить изменения?",
+                                         "Подтверждение изменений",
+                                         MessageBoxButton.YesNo,
+                                         MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                // Обновляем данные в выбранном номере
+                var nomerToEdit = _context.Nomers.FirstOrDefault(n => n.Id == SelectedNomer.Id);
+                if (nomerToEdit != null)
+                {
+                    nomerToEdit.Number = Number;
+                    nomerToEdit.Floor = Floor;
+                    nomerToEdit.Cost = Cost;
+                    nomerToEdit.Description = Description;
+                    nomerToEdit.TypeNumder = SelectedTypeNumder;
+
+                    _context.SaveChanges();
+
+                    // Обновляем коллекцию для отображения изменений
+                    NomerList = new ObservableCollection<Nomer>(_context.Nomers.ToList());
+
+                    MessageBox.Show("Изменения успешно сохранены!");
+                }
+            }
+        }
+
+        // Метод для проверки возможности изменения
+        private bool CanEditNomer(object obj)
+        {
+            return SelectedNomer != null;
+        }
+
         // Логика удаления номера
         private void DeleteNomer(object obj)
         {
@@ -173,24 +226,31 @@ namespace WpfApp1.ViewModel
                 return;
             }
 
-            // Удаляем номер из базы данных
-            _context.Nomers.Remove(SelectedNomer);
-            _context.SaveChanges();
+            var result = MessageBox.Show($"Вы уверены, что хотите удалить номер {SelectedNomer.Number}?",
+                                         "Подтверждение",
+                                         MessageBoxButton.YesNo,
+                                         MessageBoxImage.Warning);
 
-            // Удаляем номер из коллекции
-            NomerList.Remove(SelectedNomer);
+            if (result == MessageBoxResult.Yes)
+            {
+                // Удаляем номер из базы данных
+                _context.Nomers.Remove(SelectedNomer);
+                _context.SaveChanges();
 
-            MessageBox.Show("Номер успешно удален!");
+                // Удаляем номер из коллекции
+                NomerList.Remove(SelectedNomer);
 
-            // Сбрасываем выбор
-            SelectedNomer = null;
+                MessageBox.Show("Номер успешно удален!");
+
+                // Сбрасываем выбор
+                SelectedNomer = null;
+            }
         }
 
         // Метод для проверки возможности удаления
         private bool CanDeleteNomer(object obj)
         {
-            return SelectedNomer != null; // Удалить можно только при выбранном номере
+            return SelectedNomer != null;
         }
     }
-
 }

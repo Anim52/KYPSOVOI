@@ -25,15 +25,16 @@
                 <Button x:Name="btn3" Tag="Гости" Width="150" Height="60" Margin="8" Style="{StaticResource MainButton}" Click="btn3_Click">
                     <Image Source="/Assets/Resources/Guest.png"/>
                 </Button>
-                <Button x:Name="btn4" Width="170" Height="60" Margin="8" Tag="Персонал" Style="{StaticResource MainButton}" Click="btn4_Click">
-                    <Image Source="/Assets/Resources/Emploee.png"/>
-                </Button>
                 <Button x:Name="btn5" Width="150" Height="60" Tag="Услуги" Margin="8" Style="{StaticResource MainButton}" Click="btn5_Click">
                     <Image Source="/Assets/Resources/Service.png"/>
                 </Button>
                 <Button x:Name="btn6" Width="220" Height="60" Tag="Бронирование" Margin="8" Style="{StaticResource MainButton}" Click="btn6_Click">
                     <Image Source="/Assets/Resources/Reservation.png"/>
                 </Button>
+                <StackPanel Orientation="Horizontal">
+                    <Button x:Name="Close_btn" Content="❌" Style="{StaticResource LoginButton}" Width="50" HorizontalAlignment="Right" Foreground="Black" Margin="299,0,0,0" Click="Close_btn_Click"/>
+                   
+                </StackPanel>
             </StackPanel>
         </Grid>
         <ContentControl x:Name="ContentControlFrame" Grid.Row="1"/>
