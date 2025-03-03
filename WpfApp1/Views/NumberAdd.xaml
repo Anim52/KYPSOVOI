@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1.Views"
         mc:Ignorable="d"
-        Title="NumberAdd" Height="550" Width="400"
+        Title="NumberAdd" Height="650" Width="800"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         ResizeMode="NoResize"
@@ -17,13 +17,21 @@
             <RowDefinition Height="2*"/>
             <RowDefinition Height="22*"/>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0">
-            <Button Background="#A98743" Style="{StaticResource LoginButton}" Click="close_Click" Width="75" Height="45" Content="Close" HorizontalAlignment="Right"/>
-        </StackPanel>  
-        <StackPanel Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Row="0" Grid.Column="1">
+            <Button Background="#A98743" Style="{StaticResource LoginButton}" Click="close_Click" Width="75" Height="45" Content="❌" HorizontalAlignment="Right" />
+        </StackPanel>
+        <StackPanel Grid.Row="2" Grid.Column="0">
+            <Image Source="{Binding ImagePath}" VerticalAlignment="Center" Width="500" Height="300" Stretch="Uniform" Margin="5"/>
+        </StackPanel>
+        <StackPanel Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1">
             <TextBlock Text="Номер:" VerticalAlignment="Center" Margin="5"/>
             <TextBox Grid.Row="0" Text="{Binding Number}" Margin="5" Style="{StaticResource TextBoxStyle}"/>
-
+            <Button Content="Выбрать фото" Command="{Binding SelectImageCommand}" Width="150" Margin="5" Style="{StaticResource LoginButton}"/>
+           
             <TextBlock Text="Этаж:" VerticalAlignment="Center" Margin="5"/>
             <TextBox Text="{Binding Floor}" Margin="5" Style="{StaticResource TextBoxStyle}"/>
 
@@ -42,7 +50,7 @@
                   Margin="5"/>
             <!-- Кнопка Добавить -->
             <Button Content="Добавить" 
-                Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" 
+                Grid.Row="6" Grid.Column="0" 
                 Command="{Binding AddNomerCommand}" 
                 Margin="5" Background="#A98743" Style="{StaticResource LoginButton}"/>
         </StackPanel>

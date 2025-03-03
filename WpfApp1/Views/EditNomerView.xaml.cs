@@ -11,6 +11,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WpfApp1.PageModelViews;
+using WpfApp1.Service;
+using WpfApp1.ViewModel;
 
 namespace WpfApp1.Views
 {
@@ -19,10 +22,20 @@ namespace WpfApp1.Views
     /// </summary>
     public partial class EditNomerVieц : Window
     {
-        public EditNomerVieц()
+        public EditNomerVieц(Nomer SelectedNomer)
         {
             InitializeComponent();
-
+            if (SelectedNomer != null)
+            {
+               EditNomerViewModel editNomerViewModel = new EditNomerViewModel(SelectedNomer);
+                this.DataContext = editNomerViewModel;
+                
+                
+            }
+            else
+            {
+                MessageBox.Show("Выберите номер для редактирования.");
+            }
         }
     }
 }

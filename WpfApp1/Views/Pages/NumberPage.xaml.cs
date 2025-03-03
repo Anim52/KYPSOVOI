@@ -50,23 +50,42 @@ namespace WpfApp1.Views.Pages
             Overlay.Visibility = Visibility.Collapsed;
         }
 
+
+        private Nomer _selectedNomer;
+        public Nomer SelectedNomer
+        {
+            get => _selectedNomer;
+            set
+            {
+                _selectedNomer = value;
+            }
+        }
+
         private void btn2_Click(object sender, RoutedEventArgs e)
         {
+
+            if (SelectedNomer == null)
+            {
+                MessageBox.Show("Выберите номер для редактирования.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
             MainGrid.Effect = new BlurEffect { Radius = 10 };
 
             // Показываем затемнитель
             Overlay.Visibility = Visibility.Visible;
 
-            // Открываем окно добавления номера
-            var addNomerWindow = new NumberAdd();
-            addNomerWindow.Owner = Window.GetWindow(this);
-            addNomerWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-            addNomerWindow.ShowDialog();
+            // Открываем окно редактирования номера с передачей SelectedNomer
+            var editNomerWindow = new EditNomerVieц(SelectedNomer);
+            editNomerWindow.Owner = Window.GetWindow(this);
+            editNomerWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            editNomerWindow.ShowDialog();
 
             // Убираем размытие и затемнитель после закрытия окна
             MainGrid.Effect = null;
             Overlay.Visibility = Visibility.Collapsed;
         }
+
 
         private void EditNomer_Click(object sender, RoutedEventArgs e)
         {

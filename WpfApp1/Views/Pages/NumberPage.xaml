@@ -24,11 +24,11 @@
                     x:Name="btn1" 
                     Click="btn1_Click"/>
                 <Button Content="Изменить" 
-                Command="{Binding EditNomerCommand}" 
+                
                 Margin="0,30,0,0" 
                 Background="#A98743" 
                 Foreground="White"
-                Style="{StaticResource LoginButton}" x:Name="EditNomer" Click="EditNomer_Click"/>
+                Style="{StaticResource LoginButton}" x:Name="EditNomer" Click="btn2_Click"/>
 
                 <Button Content="Удалить" 
         Style="{StaticResource LoginButton}" 
@@ -50,6 +50,13 @@
                     <DataTemplate>
                         <Border Margin="10" Padding="10" BorderBrush="Gray" BorderThickness="1" CornerRadius="10" Background="White">
                             <DockPanel>
+                                <Image Source="{Binding ImagePath}"
+                                 Width="120" Height="100" 
+                                 Stretch="UniformToFill" 
+                                 Margin="10" 
+                                 VerticalAlignment="Center"
+                                  HorizontalAlignment="Left"/>
+
                                 <StackPanel VerticalAlignment="Center">
                                     <TextBlock Text="Номер:" FontWeight="Bold" Foreground="#A98743"/>
                                     <TextBlock Text="{Binding Number}" FontSize="18"/>

@@ -47,7 +47,7 @@ namespace WpfApp1.PageModelViews
             DeleteUserCommand = new RelayCommand(DeleteUser);
         }
 
-        // Логика удаления пользователя
+        // Логика удаления пользователя и гостя
         private void DeleteUser(object obj)
         {
             if (SelectedUser == null)
@@ -63,7 +63,15 @@ namespace WpfApp1.PageModelViews
 
             if (result == MessageBoxResult.Yes)
             {
-                // Удаляем пользователя из базы данных
+                // Находим пользователя (User), связанного с этим гостем
+                var userToDelete = _context.User.FirstOrDefault(u => u.Id == SelectedUser.Id);
+
+                if (userToDelete != null)
+                {
+                    _context.User.Remove(userToDelete);
+                }
+
+                // Удаляем гостя из базы данных
                 _context.Guests.Remove(SelectedUser);
                 _context.SaveChanges();
 

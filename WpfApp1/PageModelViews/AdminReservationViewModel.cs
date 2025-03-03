@@ -64,7 +64,7 @@ namespace WpfApp1.PageModelViews
             if (result == MessageBoxResult.Yes)
             {
                 // Изменяем статус бронирования на "Подтверждено"
-                SelectedReservation.Status = Status.Populated;
+                SelectedReservation.Status = Status.Verified;
                 SelectedReservation.Nomer.Status = false; // Номер занят
 
                 _context.Reservations.Update(SelectedReservation);
@@ -108,6 +108,7 @@ namespace WpfApp1.PageModelViews
                 MessageBox.Show("Выберите бронирование для отмены!");
                 return;
             }
+            SelectedReservation.Nomer.Status = true;
 
             _context.Reservations.Remove(SelectedReservation);
             _context.SaveChanges();

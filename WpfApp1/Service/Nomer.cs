@@ -36,12 +36,13 @@ namespace WpfApp1.Service
 
         public Guid Id { get; set; }
         
-       public TypeNumder TypeNumder { get; set; }   
+        public TypeNumder TypeNumder { get; set; }   
         public int Number {  get; set; }
         public int Floor { get; set; }
         public bool Status { get; set; }
         public decimal Cost {  get; set; }
         public string Description {  get; set; }
+        public string? ImagePath { get; set; }
 
         [NotMapped]
 

@@ -9,6 +9,7 @@ using System.Windows;
 using WpfApp1.Command;
 using WpfApp1.Context;
 using WpfApp1.Service;
+using Microsoft.Win32;
 
 namespace WpfApp1.ViewModel
 {
@@ -22,8 +23,9 @@ namespace WpfApp1.ViewModel
         private decimal _cost;
         private string _description;
         private TypeNumder _selectedTypeNumder;
+        private string _imagePath;
 
-        // Коллекция для хранения номеров
+        // Коллекция номеров
         private ObservableCollection<Nomer> _nomerList;
         private Nomer _selectedNomer;
 
@@ -34,8 +36,8 @@ namespace WpfApp1.ViewModel
             AddNomerCommand = new RelayCommand(AddNomer);
             DeleteNomerCommand = new RelayCommand(DeleteNomer, CanDeleteNomer);
             EditNomerCommand = new RelayCommand(EditNomer, CanEditNomer);
+            SelectImageCommand = new RelayCommand(SelectImage); // Добавили команду выбора изображения
 
-            // Заполняем список типов номеров
             TypeNumderList = new ObservableCollection<TypeNumder>
             {
                 TypeNumder.Standart,
@@ -44,11 +46,11 @@ namespace WpfApp1.ViewModel
                 TypeNumder.Apartment
             };
 
-            // Инициализируем коллекцию номеров
+            // Загружаем список номеров из базы
             NomerList = new ObservableCollection<Nomer>(_context.Nomers.ToList());
         }
 
-        // Свойства для привязки в XAML
+        // Свойства для привязки данных
         public int Number
         {
             get => _number;
@@ -99,9 +101,18 @@ namespace WpfApp1.ViewModel
             }
         }
 
+        public string ImagePath
+        {
+            get => _imagePath;
+            set
+            {
+                _imagePath = value;
+                OnPropertyChanged(nameof(ImagePath));
+            }
+        }
+
         public ObservableCollection<TypeNumder> TypeNumderList { get; set; }
 
-        // Коллекция для отображения номеров
         public ObservableCollection<Nomer> NomerList
         {
             get => _nomerList;
@@ -112,7 +123,6 @@ namespace WpfApp1.ViewModel
             }
         }
 
-        // Свойство для выбранного номера
         public Nomer SelectedNomer
         {
             get => _selectedNomer;
@@ -123,14 +133,26 @@ namespace WpfApp1.ViewModel
             }
         }
 
-        // Команда для добавления номера
+        // Команды
         public ICommand AddNomerCommand { get; }
-
-        // Команда для удаления номера
         public ICommand DeleteNomerCommand { get; }
-
-        // Команда для изменения номера
         public ICommand EditNomerCommand { get; }
+        public ICommand SelectImageCommand { get; }
+
+        // Метод выбора изображения
+        private void SelectImage(object obj)
+        {
+            OpenFileDialog dlg = new OpenFileDialog
+            {
+                DefaultExt = ".png",
+                Filter = "JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg|GIF Files (*.gif)|*.gif"
+            };
+
+            if (dlg.ShowDialog() == true)
+            {
+                ImagePath = dlg.FileName;
+            }
+        }
 
         // Логика добавления номера
         private void AddNomer(object obj)
@@ -146,10 +168,11 @@ namespace WpfApp1.ViewModel
                 Id = Guid.NewGuid(),
                 Number = Number,
                 Floor = Floor,
-                Status = true, // По умолчанию - Свободен
+                Status = true,
                 Cost = Cost,
                 Description = Description,
-                TypeNumder = SelectedTypeNumder
+                TypeNumder = SelectedTypeNumder,
+                ImagePath = ImagePath // Сохраняем путь к изображению
             };
 
             _context.Nomers.Add(newNomer);
@@ -157,15 +180,15 @@ namespace WpfApp1.ViewModel
 
             MessageBox.Show("Номер успешно добавлен!");
 
-            // Добавляем новый номер в коллекцию
             NomerList.Add(newNomer);
 
-            // Очищаем поля ввода
+            // Очищаем поля
             Number = 0;
             Floor = 0;
             Cost = 0;
             Description = string.Empty;
             SelectedTypeNumder = TypeNumder.Standart;
+            ImagePath = null;
         }
 
         // Логика изменения номера
@@ -177,13 +200,6 @@ namespace WpfApp1.ViewModel
                 return;
             }
 
-            // Открываем окно редактирования с заполненными полями
-            Number = SelectedNomer.Number;
-            Floor = SelectedNomer.Floor;
-            Cost = SelectedNomer.Cost;
-            Description = SelectedNomer.Description;
-            SelectedTypeNumder = SelectedNomer.TypeNumder;
-
             var result = MessageBox.Show("Вы уверены, что хотите сохранить изменения?",
                                          "Подтверждение изменений",
                                          MessageBoxButton.YesNo,
@@ -191,7 +207,6 @@ namespace WpfApp1.ViewModel
 
             if (result == MessageBoxResult.Yes)
             {
-                // Обновляем данные в выбранном номере
                 var nomerToEdit = _context.Nomers.FirstOrDefault(n => n.Id == SelectedNomer.Id);
                 if (nomerToEdit != null)
                 {
@@ -200,10 +215,10 @@ namespace WpfApp1.ViewModel
                     nomerToEdit.Cost = Cost;
                     nomerToEdit.Description = Description;
                     nomerToEdit.TypeNumder = SelectedTypeNumder;
+                    nomerToEdit.ImagePath = ImagePath; // Обновляем путь к изображению
 
                     _context.SaveChanges();
 
-                    // Обновляем коллекцию для отображения изменений
                     NomerList = new ObservableCollection<Nomer>(_context.Nomers.ToList());
 
                     MessageBox.Show("Изменения успешно сохранены!");
@@ -211,7 +226,6 @@ namespace WpfApp1.ViewModel
             }
         }
 
-        // Метод для проверки возможности изменения
         private bool CanEditNomer(object obj)
         {
             return SelectedNomer != null;
@@ -233,21 +247,17 @@ namespace WpfApp1.ViewModel
 
             if (result == MessageBoxResult.Yes)
             {
-                // Удаляем номер из базы данных
                 _context.Nomers.Remove(SelectedNomer);
                 _context.SaveChanges();
 
-                // Удаляем номер из коллекции
                 NomerList.Remove(SelectedNomer);
 
                 MessageBox.Show("Номер успешно удален!");
 
-                // Сбрасываем выбор
                 SelectedNomer = null;
             }
         }
 
-        // Метод для проверки возможности удаления
         private bool CanDeleteNomer(object obj)
         {
             return SelectedNomer != null;
